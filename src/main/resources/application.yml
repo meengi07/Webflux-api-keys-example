@@ -1,0 +1,24 @@
+spring:
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/test
+    username: test
+    password: 1234
+
+  pool:
+    max-size: 400
+    validation-query: SELECT 1
+    enabled: true
+    initial-size: 100
+    max-idle-time: 30m
+
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+
+
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc: DEBUG

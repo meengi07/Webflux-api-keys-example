@@ -1,10 +1,9 @@
 package com.webflux.api.example.user.service;
 
-import com.webflux.api.example.user.models.User;
+import com.webflux.api.example.user.models.UserDTO;
 import com.webflux.api.example.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -13,12 +12,13 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public Mono<User> getUserInfo(String id) {
-        return userRepository.findById(id);
+    public Mono<UserDTO> getUserNickName(String id) {
+        return userRepository.findById(id).map(m -> new UserDTO(m.getNickname()));
     }
 
-    public Flux<User> getUserList(User user) {
-        return userRepository.getUserList(user);
+    public Mono<UserDTO> getUserDetail(String id) {
+
+        return userRepository.findById(id).map(m -> new UserDTO(m));
     }
 
 }
